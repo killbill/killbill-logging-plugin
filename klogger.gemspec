@@ -1,7 +1,6 @@
 version = File.read(File.expand_path('../VERSION', __FILE__)).strip
 
 Gem::Specification.new do |s|
-  s.platform    = Gem::Platform::RUBY
   s.name        = 'klogger'
   s.version     = version
   s.summary     = 'Plugin to log Killbill events.'
@@ -23,9 +22,9 @@ Gem::Specification.new do |s|
 
   s.rdoc_options << '--exclude' << '.'
 
-  s.add_dependency 'rdoc', '~> 3.4'
+  s.add_dependency 'killbill'
   s.add_dependency 'cinch', '~> 2.0.3'
 
-  s.add_development_dependency 'rake', '>= 0.8.7'
+  s.add_development_dependency 'rake', '>= 10.0.0'
   s.add_development_dependency 'rspec', '~> 2.12.0'
 end
