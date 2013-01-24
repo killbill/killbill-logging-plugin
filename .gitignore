@@ -21,4 +21,8 @@ doc/
 Jarfile.lock
 Gemfile.lock
 
+# Build directory
+klogger/
+
+# Config file
 klogger.yml
