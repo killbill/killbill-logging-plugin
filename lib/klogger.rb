@@ -12,47 +12,55 @@ MODULES = {
             :syslog => Klogger::Syslog
           }
 
-ENABLED_MODULES = []
-
-LOG = Logger.new(STDOUT)
-LOG.level = Logger::INFO
-
-# Parse the config file
-begin
-  CONFIG = Psych.load_file('klogger.yml')
-rescue Errno::ENOENT
-  LOG.warn 'Unable to find the config file klogger.yml'
-  CONFIG = {}
-end
-
-# Instantiate each module
-CONFIG.each do |kmodule, config|
-  next unless config['enabled']
-
-  module_klass = MODULES[kmodule.to_sym]
-  next unless module_klass
-
-  LOG.info "Module #{module_klass} enabled"
-  ENABLED_MODULES << module_klass.send('new', config)
-end
-
 # Killbill plugin, which dispatches to all klogger modules
 module Klogger
   class KloggerPlugin < Killbill::Plugin::Notification
 
+    def initialize(*args)
+      super(*args)
+      @enabled_modules = []
+    end
+
     def start_plugin
-      ENABLED_MODULES.each { |m| m.start_plugin rescue nil }
+      configure_modules
+      @enabled_modules.each { |m| m.start_plugin rescue nil }
+
       super
+
+      @logger.info "Klogger::KloggerPlugin started"
     end
 
     def on_event(event)
-      ENABLED_MODULES.each { |m| m.on_event(event) rescue nil }
+      @enabled_modules.each { |m| m.on_event(event) rescue nil }
     end
 
     def stop_plugin
       super
-      ENABLED_MODULES.each { |m| m.stop_plugin rescue nil }
+      @enabled_modules.each { |m| m.stop_plugin rescue nil }
+      @logger.info "Klogger::KloggerPlugin stopped"
     end
 
+    private
+
+    def configure_modules
+      # Parse the config file
+      begin
+        @config = Psych.load_file("#{@conf_dir}/klogger.yml")
+      rescue Errno::ENOENT
+        @logger.warn "Unable to find the config file #{@conf_dir}/klogger.yml"
+        return
+      end
+
+      # Instantiate each module
+      @config.each do |kmodule, config|
+        next unless config[:enabled]
+
+        module_klass = MODULES[kmodule.to_sym]
+        next unless module_klass
+
+        @logger.info "Module #{module_klass} enabled"
+        @enabled_modules << module_klass.send('new', config)
+      end
+    end
   end
 end

@@ -7,7 +7,8 @@ module Klogger
       @channels = @config[:channels] || ['#killbilling']
       start_bot(@config[:nick] || 'klogger',
                 @config[:server] || 'irc.freenode.org',
-                @config[:port] || 6667)
+                @config[:port] || 6667,
+                @config[:password])
     end
 
     def on_event(event)
@@ -43,13 +44,14 @@ module Klogger
       end
     end
 
-    def start_bot(nick, server, port)
+    def start_bot(nick, server, port, password)
       connected = false
       @bot = Cinch::Bot.new do
         configure do |c|
           c.nick            = nick
           c.server          = server
           c.port            = port
+          c.password        = password
           c.channels        = @channels
           c.plugins.plugins = [KloggerIRCBot]
 
