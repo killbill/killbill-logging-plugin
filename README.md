@@ -25,6 +25,16 @@ irc:
   :server: 'irc.freenode.org'
   :port: 6667
   :password: 'foo'
+
+email:
+  :enabled: true
+  :address: 'smtp.gmail.com'
+  :port: 587
+  :domain: 'your.host.name'
+  :username: 'username'
+  :password: 'password'
+  :authentication: 'plain'
+  :enable_starttls_auto: true
 ```
 
 By default, the plugin will look at the plugin directory root (where `killbill.properties` is located) to find this file.
