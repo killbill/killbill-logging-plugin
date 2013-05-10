@@ -26,3 +26,5 @@ klogger/
 
 # Config file
 klogger.yml
+
+.DS_Store
