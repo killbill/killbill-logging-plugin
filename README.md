@@ -27,6 +27,8 @@ irc:
   :password: 'foo'
 
 email:
+  :to: pierre@pierre.com
+  :from: ops@pierre.com
   :enabled: true
   :address: 'smtp.gmail.com'
   :port: 587
