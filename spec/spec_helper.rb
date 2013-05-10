@@ -1,5 +1,6 @@
 require 'bundler'
 require 'klogger'
+require 'logger'
 
 require 'rspec'
 

@@ -31,7 +31,7 @@ end
 describe Klogger do
 
   it 'should be able to parse a config file' do
-    plugin = Klogger::KloggerPlugin.new
+    plugin = Klogger::KloggerPlugin.new(:logger => Logger.new(STDOUT), :conf_dir => File.expand_path('../../', File.dirname(__FILE__)))
     plugin.start_plugin
     plugin.on_event MockEvent.new
     plugin.stop_plugin
