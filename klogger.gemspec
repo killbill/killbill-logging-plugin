@@ -22,10 +22,11 @@ Gem::Specification.new do |s|
 
   s.rdoc_options << '--exclude' << '.'
 
-  s.add_dependency 'killbill', '~> 1.0.8'
+  s.add_dependency 'killbill', '~> 1.0.15'
   s.add_dependency 'cinch', '~> 2.0.3'
 
   s.add_development_dependency 'jbundler', '~> 0.4.1'
   s.add_development_dependency 'rake', '>= 10.0.0'
+  s.add_development_dependency 'rack', '>= 1.5.2'
   s.add_development_dependency 'rspec', '~> 2.12.0'
 end
