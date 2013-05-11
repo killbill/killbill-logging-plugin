@@ -22,7 +22,7 @@ Jarfile.lock
 Gemfile.lock
 
 # Build directory
-klogger/
+/klogger/
 
 # Config file
 klogger.yml

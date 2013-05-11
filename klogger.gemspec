@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'killbill', '~> 1.0.15'
   s.add_dependency 'cinch', '~> 2.0.3'
+  s.add_dependency 'mail', '~> 2.5.3'
 
   s.add_development_dependency 'jbundler', '~> 0.4.1'
   s.add_development_dependency 'rake', '>= 10.0.0'

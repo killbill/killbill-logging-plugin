@@ -4,12 +4,14 @@ require 'psych'
 require 'killbill'
 
 require 'klogger/base'
+require 'klogger/email'
 require 'klogger/irc'
 require 'klogger/syslog'
 
 MODULES = {
             :irc => Klogger::IRC,
-            :syslog => Klogger::Syslog
+            :syslog => Klogger::Syslog,
+            :email => Klogger::Email
           }
 
 # Killbill plugin, which dispatches to all klogger modules
@@ -23,7 +25,13 @@ module Klogger
 
     def start_plugin
       configure_modules
-      @enabled_modules.each { |m| m.start_plugin rescue nil }
+      @enabled_modules.each do |m|
+        begin
+          m.start_plugin
+        rescue => e
+          @logger.warn "Unable to start module #{m.class}: #{e.message}"
+        end
+      end
 
       super
 
@@ -31,12 +39,26 @@ module Klogger
     end
 
     def on_event(event)
-      @enabled_modules.each { |m| m.on_event(event) rescue nil }
+      @enabled_modules.each do |m|
+        begin
+          m.on_event(event)
+        rescue => e
+          @logger.warn "Unable to send event to module #{m.class}: #{e.message}"
+        end
+      end
     end
 
     def stop_plugin
       super
-      @enabled_modules.each { |m| m.stop_plugin rescue nil }
+
+      @enabled_modules.each do |m|
+        begin
+          m.stop_plugin
+        rescue => e
+          @logger.warn "Unable to stop module #{m.class}: #{e.message}"
+        end
+      end
+
       @logger.info "Klogger::KloggerPlugin stopped"
     end
 
@@ -59,7 +81,7 @@ module Klogger
         next unless module_klass
 
         @logger.info "Module #{module_klass} enabled"
-        @enabled_modules << module_klass.send('new', config)
+        @enabled_modules << module_klass.send('new', config, @logger)
       end
     end
   end

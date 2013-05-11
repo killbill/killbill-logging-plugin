@@ -1,17 +1,18 @@
 module Klogger
   class KloggerBase
 
-    def initialize(config)
+    def initialize(config, logger)
       @config = config
+      @logger = logger
     end
 
     def self.event_to_hash(event)
       {
-        :event_type => event.get_event_type,
-        :object_type => event.get_object_type,
-        :event_id => event.get_object_id.to_string,
-        :account_id => event.get_account_id.to_string,
-        :tenant_id => event.get_tenant_id.to_string
+        :event_type => event.event_type,
+        :object_type => event.object_type,
+        :event_id => event.object_id,
+        :account_id => event.account_id,
+        :tenant_id => event.tenant_id
       }
     end
 
