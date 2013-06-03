@@ -28,3 +28,5 @@ Gemfile.lock
 klogger.yml
 
 .DS_Store
+
+.idea

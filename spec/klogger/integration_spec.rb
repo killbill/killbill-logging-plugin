@@ -30,11 +30,30 @@ end
 
 describe Klogger do
 
-  it 'should be able to parse a config file' do
-    plugin = Klogger::KloggerPlugin.new(:logger => Logger.new(STDOUT), :conf_dir => File.expand_path('../../', File.dirname(__FILE__)))
-    plugin.start_plugin
-    plugin.on_event MockEvent.new
-    plugin.stop_plugin
+  before(:each) do
+    Dir.mktmpdir do |dir|
+      file = File.new(File.join(dir, 'klogger.yml'), "w+")
+      file.write(<<-eos)
+syslog:
+  :enabled: false
+irc:
+  :enabled: false
+email:
+  :enabled: false
+      eos
+      file.close
+
+      @plugin = Klogger::KloggerPlugin.new
+      @plugin.logger = Logger.new(STDOUT)
+      @plugin.conf_dir = File.dirname(file)
+
+      # Start the plugin here - since the config file will be deleted
+      @plugin.start_plugin
+    end
   end
 
+  it "should start and stop correctly" do
+    @plugin.on_event MockEvent.new
+    @plugin.stop_plugin
+  end
 end
