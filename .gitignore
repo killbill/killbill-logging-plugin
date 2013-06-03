@@ -30,3 +30,4 @@ klogger.yml
 .DS_Store
 
 .idea
+*.asc
