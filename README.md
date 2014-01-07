@@ -4,7 +4,9 @@
 killbill-logging-plugin
 =======================
 
-Plugin to log Kill Bill events.
+Plugin to log Kill Bill events to Syslog, IRC, emails, ...
+
+Release builds are available on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.ning.killbill.ruby%22%20AND%20a%3A%22logging-plugin%22) with coordinates `com.ning.killbill.ruby:logging-plugin`.
 
 Configuration
 -------------
