@@ -25,7 +25,7 @@
     <groupId>com.ning.killbill.ruby</groupId>
     <artifactId>logging-plugin</artifactId>
     <packaging>pom</packaging>
-    <version>1.6.3</version>
+    <version>1.6.4</version>
     <name>logging-plugin</name>
     <url>http://github.com/killbill/killbill-logging-plugin</url>
     <description>Plugin to log Kill Bill events</description>
