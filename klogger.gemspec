@@ -24,6 +24,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'killbill', '~> 2.0.0'
   s.add_dependency 'cinch', '~> 2.0.3'
+  # Required to avoid errors like java.lang.NoClassDefFoundError: org/bouncycastle/asn1/DERBoolean
+  s.add_dependency 'jruby-openssl', '~> 0.9.4'
   s.add_dependency 'mail', '~> 2.5.3'
 
   s.add_development_dependency 'jbundler', '~> 0.4.1'
