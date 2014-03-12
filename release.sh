@@ -31,7 +31,7 @@ rake killbill:package
 ARTIFACT="$PWD/pkg/klogger-$VERSION.tar.gz"
 echo "Pushing $ARTIFACT to Maven Central"
 mvn gpg:sign-and-deploy-file \
-    -DgroupId=com.ning.killbill.ruby \
+    -DgroupId=org.kill-bill.billing.plugin.ruby \
     -DartifactId=logging-plugin \
     -Dversion=$VERSION \
     -Dpackaging=tar.gz \
