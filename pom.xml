@@ -25,7 +25,7 @@
     <groupId>org.kill-bill.billing.plugin.ruby</groupId>
     <artifactId>logging-plugin</artifactId>
     <packaging>pom</packaging>
-    <version>1.6.5</version>
+    <version>1.7.0</version>
     <name>logging-plugin</name>
     <url>http://github.com/killbill/killbill-logging-plugin</url>
     <description>Plugin to log Kill Bill events</description>
