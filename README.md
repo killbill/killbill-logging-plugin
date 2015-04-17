@@ -1,6 +1,3 @@
-[![Build Status](https://travis-ci.org/killbill/killbill-logging-plugin.png)](https://travis-ci.org/killbill/killbill-logging-plugin)
-[![Code Climate](https://codeclimate.com/github/killbill/killbill-logging-plugin.png)](https://codeclimate.com/github/killbill/killbill-logging-plugin)
-
 killbill-logging-plugin
 =======================
 
@@ -11,9 +8,15 @@ Release builds are available on [Maven Central](http://search.maven.org/#search%
 Configuration
 -------------
 
-The plugin expects a `klogger.yml` configuration file containing the following:
-
 ```
+curl -v \
+     -X POST \
+     -u admin:password \
+     -H 'X-Killbill-ApiKey: bob' \
+     -H 'X-Killbill-ApiSecret: lazar' \
+     -H 'X-Killbill-CreatedBy: admin' \
+     -H 'Content-Type: text/plain' \
+     -d '
 syslog:
   :enabled: true
   :ident: 'klogger'
@@ -22,7 +25,7 @@ syslog:
 
 irc:
   :enabled: true
-  :channels: ['#killbilling']
+  :channels: ['#killbillio']
   :nick: 'klogger'
   :server: 'irc.freenode.org'
   :port: 6667
@@ -39,7 +42,6 @@ email:
   :password: 'password'
   :authentication: 'plain'
   :enable_starttls_auto: true
+' \
+     http://127.0.0.1:8080/1.0/kb/tenants/uploadPluginConfig/killbill-logger
 ```
-
-By default, the plugin will look at the plugin directory root (where `killbill.properties` is located) to find this file.
-Alternatively, set the Kill Bill system property `-Dorg.killbill.billing.osgi.bundles.jruby.conf.dir=/my/directory` to specify another location.
