@@ -6,25 +6,39 @@ class String
   end
 end
 
+class FakeJavaTenantUserApi
+
+  attr_accessor :per_tenant_config
+
+  def initialize(per_tenant_config = {})
+    @per_tenant_config = per_tenant_config
+  end
+
+  def get_tenant_values_for_key(key, context)
+    result = @per_tenant_config[context.tenant_id.to_s]
+    result ? [result] : nil
+  end
+end
+
 class MockEvent
-  def get_event_type
+  def event_type
     'InvoiceCreationEvent'
   end
 
-  def get_object_type
+  def object_type
     'INVOICE'
   end
 
-  def get_object_id
-    '1234'
+  def object_id
+    SecureRandom.uuid
   end
 
-  def get_account_id
-    '11-22-33'
+  def account_id
+    SecureRandom.uuid
   end
 
-  def get_tenant_id
-    '1100-998'
+  def tenant_id
+    SecureRandom.uuid
   end
 end
 
@@ -46,6 +60,10 @@ email:
       @plugin = Klogger::KloggerPlugin.new
       @plugin.logger = Logger.new(STDOUT)
       @plugin.conf_dir = File.dirname(file)
+
+      @tenant_api     = FakeJavaTenantUserApi.new
+      svcs            = {:tenant_user_api => @tenant_api}
+      @plugin.kb_apis = Killbill::Plugin::KillbillApi.new('klogger', svcs)
 
       # Start the plugin here - since the config file will be deleted
       @plugin.start_plugin
