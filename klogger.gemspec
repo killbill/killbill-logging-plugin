@@ -12,25 +12,26 @@ Gem::Specification.new do |s|
 
   s.author   = 'Kill Bill core team'
   s.email    = 'killbilling-users@googlegroups.com'
-  s.homepage = 'http://kill-bill.org'
+  s.homepage = 'http://killbill.io'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.bindir        = 'bin'
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = ["lib"]
+  s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
+  s.require_paths = ['lib']
 
   s.rdoc_options << '--exclude' << '.'
 
-  s.add_dependency 'killbill', '~> 3.2.0'
+  s.add_dependency 'killbill', '~> 4.0.0'
+
   s.add_dependency 'cinch', '~> 2.0.3'
   s.add_dependency 'mail', '~> 2.5.3'
   if defined?(JRUBY_VERSION)
     # Required to avoid errors like java.lang.NoClassDefFoundError: org/bouncycastle/asn1/DERBoolean
-    s.add_dependency 'jruby-openssl', '~> 0.9.4'
+    s.add_dependency 'jruby-openssl', '~> 0.9.6'
   end
 
-  s.add_development_dependency 'jbundler', '~> 0.4.1'
+  s.add_development_dependency 'jbundler', '~> 0.4.3'
   s.add_development_dependency 'rake', '>= 10.0.0'
   s.add_development_dependency 'rack', '>= 1.5.2'
   s.add_development_dependency 'rspec', '~> 2.12.0'

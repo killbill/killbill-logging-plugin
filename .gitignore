@@ -19,16 +19,15 @@ _yardoc
 doc/
 
 .jbundler
-Jarfile.lock
-Gemfile.lock
-
-# Build directory
-/klogger/
 
 # Config file
 klogger.yml
 
 .DS_Store
 
-.idea
-*.asc
+target
+pom.xml.asc
+
+.idea/
+
+Gemfile.head.lock
