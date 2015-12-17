@@ -22,7 +22,7 @@ Gem::Specification.new do |s|
 
   s.rdoc_options << '--exclude' << '.'
 
-  s.add_dependency 'killbill', '~> 4.0.0'
+  s.add_dependency 'killbill', '~> 7.0'
 
   s.add_dependency 'cinch', '~> 2.0.3'
   s.add_dependency 'mail', '~> 2.5.3'
@@ -31,7 +31,7 @@ Gem::Specification.new do |s|
     s.add_dependency 'jruby-openssl', '~> 0.9.6'
   end
 
-  s.add_development_dependency 'jbundler', '~> 0.4.3'
+  s.add_development_dependency 'jbundler', '~> 0.9.2'
   s.add_development_dependency 'rake', '>= 10.0.0'
   s.add_development_dependency 'rack', '>= 1.5.2'
   s.add_development_dependency 'rspec', '~> 2.12.0'
