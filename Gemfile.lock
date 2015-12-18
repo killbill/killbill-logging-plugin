@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    klogger (2.0.0)
+    klogger (3.0.0)
       cinch (~> 2.0.3)
       jruby-openssl (~> 0.9.6)
       killbill (~> 7.0)
